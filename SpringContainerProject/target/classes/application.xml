@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<!-- 
+		클래스 등록
+		1. 객체 생성(Bean)
+			1) 싱글턴 => default
+			2) 프로토타입 => 복제(Clone())
+		2. 멤버 변수의 초기화
+		3. 필요한 메소드 호출
+		===============> Spring이 하는 작업
+		4. 객체 사용 => 유일하게 프로그래머가 하는 작업
+		===============
+		5. 객체 메모리 해제
+		6. 객체 소멸
+		===============> Spring이 하는 작업 => 객체의 생명 주기
+	-->
+	 
+	<!-- Spring에 Class 등록 => 객체 생성 => 메모리 할당(객체의 주소값을 가지게 됨) --> 
+	<bean id="board" class="com.sist.spring3.Board" scope="prototype"/> <!-- scope="prototype" => clone() : 따로 생성 => 주소값이 다 달라짐 -->
+	<bean id="notice" class="com.sist.spring3.Notice"/>
+	<bean id="member" class="com.sist.spring3.Member"/>
+</beans>

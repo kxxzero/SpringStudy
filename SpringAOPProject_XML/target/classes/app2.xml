@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+
+	<bean id="dao" class="com.sist.dao.MyDAO2"/>
+	
+	<!-- AOP 생성 
+		자동 호출이 가능하도록 제어
+			1. 언제 어디서 호출할 것인지 여부 확인
+				1) 시점 : 어떤 클래스의 메소드에 적용할 것인가 => PointCut
+				2) 호출 위치 지정 : => JoinPoint
+					= before
+					= after
+					= after-returning
+					= after-throwing
+					= around
+					예) public String display() {
+							before // try 전에 호출
+							try {
+								around // 작업 시간, 트랜잭션(작업의 최소 단위)
+								// 핵심 코딩 위치
+								around
+							} catch(Exception ex) {
+								after-throwing // 오류 처리								
+							} finally {
+								after
+							}
+							after-returning // return ""; 역할
+						}
+				3)
+	-->
+	<bean id="aspect" class="com.sist.aop.DBAspect"/> <!-- 객체 등록 -->
+	
+	<aop:config>
+		<aop:aspect ref="aspect"> <!-- 공통으로 사용되는 클래스를 명시 -->
+			<!-- before : 시작과 동시에 호툴되는 메소드 -->
+			<aop:before method="getConnection"
+				pointcut="execution(* com.sist.dao.MyDAO2.*(..))"
+			/> 
+			<!--
+				*com.sist.dao.MyDAO2.*(..) => '..' => 매개변수가 0 이상
+				=> return형			=> 해당 파일 안에 있는 모든 메소드에 적용
+			-->
+			
+			<!-- after : 무조건 수행되는 메소드 -->
+			<aop:after method="disConnection"
+				pointcut="execution(* com.sist.dao.MyDAO2.*(..))"
+			/>
+		</aop:aspect>
+	</aop:config>
+</beans>
