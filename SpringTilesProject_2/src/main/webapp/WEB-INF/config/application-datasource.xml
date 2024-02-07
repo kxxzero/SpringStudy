@@ -28,6 +28,6 @@
 		p:dataSource-ref="ds"
 	/>
 	
-	<!-- Mapper 구현?(인터페이스) -->
+	<!-- Mapper 구현 (인터페이스) -->
 	<mybatis-spring:scan base-package="com.sist.mapper"/>
 </beans>

@@ -52,14 +52,14 @@ let foodApp=Vue.createApp({
 	},
 	mounted(){
 		// CallBack => Vue에서 자동 호출되는 생명주기 함수 => onload() => $(function(){})
-		this.dataRev()
+		this.dataRecv()
 	},
 	updated(){
 		
 	},
 	// 사용자 정의 함수 => 이벤트, 데이터 읽기, 데이터 보내기
 	methods:{
-		dataRev(){
+		dataRecv(){
 			// 데이터 목록 받기
 			axios.get('../food/list_vue.do', {
 				params:{

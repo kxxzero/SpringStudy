@@ -7,9 +7,7 @@
 <title>Insert title here</title>
 <script src="https://unpkg.com/vue@3"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script> <!-- axios : 전송 객체 => 데이터 입·출력 시 사용 -->
-
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
-
 <style>
 a.alink{
 	cursor: pointer;
