@@ -1,0 +1,26 @@
+package com.sist.service;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.sist.dao.GoodsDAO;
+import com.sist.vo.GoodsVO;
+
+@Service
+public class GoodsServiceImpl implements GoodsService {
+	private GoodsDAO dao;
+	
+	@Override
+	public List<GoodsVO> goodsListData(int start, int end) {
+		// TODO Auto-generated method stub
+		return dao.goodsListData(start, end);
+	}
+
+	@Override
+	public int goodsTotalPage() {
+		// TODO Auto-generated method stub
+		return dao.goodsTotalPage();
+	}
+
+}
