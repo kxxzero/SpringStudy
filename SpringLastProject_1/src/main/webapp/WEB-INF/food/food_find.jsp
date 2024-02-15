@@ -1,13 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://unpkg.com/vue@3"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script> <!-- axios : 전송 객체 => 데이터 입·출력 시 사용 -->
@@ -21,15 +20,15 @@ a.link, .img_click{
 	<div class="wrapper row3">
 	  <main class="container clear">
 	  	<h2 class="sectiontitle">맛집 검색</h2>
-	  	<div class="content" id="foodApp">
+	  	<div class="content" id="findApp">
 	      <div id="gallery">
 	        <figure>
-	          <header class="heading">
+	          <header class="heading inline">
 	          	<input type="text" ref="fd" size="20" class="input-sm" v-model="fd" @keyup.enter="find()">
 	          	<input type="button" value="검색" class="btn-sm btn-primary" @click="find()">
 	          </header>
 	          <ul class="nospace clear">
-	            <li v-for="vo in food_list" :class="index%4==0?'one_quarter_first':one_quarter"><img class="img_click" :src="'http://www.menupan.com'+vo.poster" :title="vo.name" @click="detail(fno)"></li>
+	            <li v-for="(vo,index) in food_list" :class="index%4==0?'one_quarter first':'one_quarter'"><img class="img_click" :src="'http://www.menupan.com'+vo.poster" :title="vo.name" @click="detail(vo.fno)"></li>
 	          </ul>
 	          <figcaption>Gallery Description Goes Here</figcaption>
 	        </figure>
@@ -54,7 +53,7 @@ a.link, .img_click{
 		props:['food_detail'],
 		template:`
 				<h3 class="text-center">맛집 상세보기</h3>
-				<table class="table>
+				<table class="table">
 					<tr>
 						<td width="30%" class="text-center" rowspan="9">
 							<img :src="'http://www.menupan.com'+food_detail.poster" style="width:100%">
@@ -94,7 +93,7 @@ a.link, .img_click{
 				</table>
 				`
 	}	
-	let foodApp=Vue.createApp({
+	let findApp=Vue.createApp({
 		data(){
 			return{
 				food_list:[],
@@ -106,7 +105,7 @@ a.link, .img_click{
 				totalpage:0,
 				startPage:0,
 				endPage:0,
-				isShow=false
+				isShow:false
 			}
 		},
 		mounted(){
@@ -127,12 +126,12 @@ a.link, .img_click{
 					this.food_list=response.data
 				})
 				
-				axios.get)'../food/page_vue.do', {
+				axios.get('../food/page_vue.do', {
 					params:{
 						page:this.curpage,
 						fd:this.fd
 					}
-				}.then(response=>{
+				}).then(response=>{
 					console.log(response.data)
 					this.page_list=response.data
 					
@@ -171,6 +170,11 @@ a.link, .img_click{
 			detail(fno){
 				this.isShow=true
 				// .do?fno=1
+				/*
+					axios.get() => 요청  
+					then() => 응답(결과)
+					catch() => 처리 과정에서 오류 발생 시 
+				*/
 				axios.get('../food/detail_vue.do',{
 					params:{
 						fno:fno
@@ -179,20 +183,20 @@ a.link, .img_click{
 					console.log(response.data)
 					this.food_detail=response.data
 					
-					@('#dialog').dialog({
+					$('#dialog').dialog({
 						autoOpen:false,
 						modal:true,
 						width:700,
 						height:600
 					}).dialog("open")
-				}).catch(error=>{
+				})/* .catch(error=>{
 					console.log(error.response)
-				})
+				}) */
 				
 			}				
 		},
 		components:{
-			// 상세보기 
+			// 상세보기 => dialog
 			'detail_dialog':detailComponent
 		}
 	}).mount('#foodApp')

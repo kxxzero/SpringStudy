@@ -2,13 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %> <!-- tiles로 화면 분할 시 필요 -->
 <!DOCTYPE html>
-<!--
-Template Name: Gravity
-Author: <a href="https://www.os-templates.com/">OS Templates</a>
-Author URI: https://www.os-templates.com/
-Licence: Free to use under our free template licence terms
-Licence URI: https://www.os-templates.com/template-terms
--->
 <html>
 <head>
 <title>Gravity</title>
@@ -25,6 +18,7 @@ Licence URI: https://www.os-templates.com/template-terms
 <a id="backtotop" href="#top"><i class="fa fa-chevron-up"></i></a> 
 
 <!-- JAVASCRIPTS -->
+<script src="https://code.jquery.com/jquery.js"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <!-- <script src="../layout/scripts/jquery.min.js"></script> --> 
 <script src="../layout/scripts/jquery.backtotop.js"></script> 

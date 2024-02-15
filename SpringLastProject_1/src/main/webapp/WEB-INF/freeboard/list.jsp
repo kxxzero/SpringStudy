@@ -10,7 +10,7 @@
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script> <!-- axios : 전송 객체 => 데이터 입·출력 시 사용 -->
 </head>
 <body>
-	<div class="wrapper row3">
+	<div class="wrapper row3" id="fboardApp">
 		<main class="container clear">
 			<h2 class="sectiontitle">자유게시판</h2>
 			<table class="table">
@@ -30,16 +30,17 @@
 				</tr>
 				<tr v-for="vo in board_list">
 					<td width="10%" class="text-center">{{vo.no}}</td>
-					<td width="45%">{{vo.subject}}</td>
+					<td width=45%><a :href="'../freeboard/detail.do?no='+vo.no">{{vo.subject}}</a></td>
 					<td width="15%" class="text-center" v-text="vo.name"></td>
 					<td width="20%" class="text-center" v-text="vo.dbday"></td>
 					<td width="10%" class="text-center" v-text="vo.hit"></td>
 				</tr>
 				<tr>
 					<td colspan="5" class="text-center">
-						<input type="button" class="btn btn-sm btn-info" value="이전">
+						<input type=button class="btn btn-sm btn-info" value="이전" @click="prev()">
 						{{curpage}} page / {{totalpage}} pages
-						<input type="button" class="btn btn-sm btn-info" value="다음">
+						<input type=button class="btn btn-sm btn-success" value="다음" @click="next()">
+					</td>
 				</tr>
 			</table>
 		</main>
@@ -101,13 +102,15 @@
 				})
 			},
 			prev(){
-				
+				this.curpage=this.curpage>1?this.curpage-1:this.curpage
+				this.dataRecv()
 			},
 			next(){
-				this.curpage=this.curpage
+				this.curpage=this.curpage<this.totalpage?this.curpage+1:this.curpage
+				this.dataRecv()
 			}
 		}
-	}).mount('.fboardApp')
+	}).mount('#fboardApp')
 </script>
 </body>
 </html>

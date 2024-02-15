@@ -1,8 +1,12 @@
 package com.sist.web;
 
 import java.util.List;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -84,7 +88,7 @@ public class FoodRestController {
 	
 	@GetMapping(value="find_vue.do", produces="text/plain;charset=UTF-8")
 	public String food_find(int page, String fd) throws Exception {		
-		int rowSize=12;
+		int rowSize=20;
 		int start=(rowSize*page)-(rowSize-1);
 		int end=(rowSize*page);
 		
@@ -125,9 +129,7 @@ public class FoodRestController {
 		
 		return json;
 	}
-		
 
-	
 	/*
 	 * 중요
 	 * 	= 어노테이션은 반드시 밑에 있는 변수, 메소드, 클래스를 제어
@@ -135,10 +137,77 @@ public class FoodRestController {
 	
 	@GetMapping(value="detail_vue.do", produces="text/plain;charset=UTF-8")
 	public String food_detail(int fno) throws Exception {
-		FoodVO vo=service.FoodDetailData(fno); // {} => []
+		FoodVO vo=service.foodDetailData(fno); // {} => []
+		// JSON 만드는 라이브러리 => jackson
+		ObjectMapper mapper=new ObjectMapper();
+		String json=mapper.writeValueAsString(vo);
+			
+		return json;
+	}
+	
+	@GetMapping(value="food_cookie_vue.do", produces="text/plain;charset=UTF-8")
+	public String food_cookie(HttpServletRequest request) throws Exception {
+		Cookie[] cookies=request.getCookies();
+		List<FoodVO> list=new ArrayList<FoodVO>();
+		int k=0;
+		if(cookies!=null) {
+			for(int i=cookies.length-1; i>=0; i--) {
+				if(k<9) {
+					if(cookies[i].getName().startsWith("food_")) {
+						String fno=cookies[i].getValue();
+						// New Cookie("food_"+fno,		String.valueOf(fno))
+						//			  =====> getName()	=====> getValue()
+						FoodVO vo=service.foodDetailData(Integer.parseInt(fno));
+						list.add(vo);
+					}
+					k++;
+				}
+			}
+		}
+		ObjectMapper mapper=new ObjectMapper();
+		String json=mapper.writeValueAsString(list);
+		return json;
+	}
+	
+	@GetMapping(value="food_list_vue.do", produces="text/plain;charset=UTF-8")
+	public String food_list(int page) throws Exception {
+		Map map=new HashMap();
+		map.put("start",(20*page)-19);
+		map.put("end", 20*page);
+		
+		List<FoodVO> list=service.foodListData(map);
+		ObjectMapper mapper=new ObjectMapper();
+		String json=mapper.writeValueAsString(list);
+		return json; // then(response=>{} => response.data
+	}
+	
+	@GetMapping(value="food_page_vue.do", produces="text/plain;charset=UTF-8")
+	public String food_list_page(int page) throws Exception {
+		final int BLOCK=10;
+		int startPage=((page-1)/BLOCK*BLOCK)+1;
+		int endPage=((page-1)/BLOCK*BLOCK)+BLOCK;
+		int totalpage=service.foodListCount();
+		if(endPage>totalpage) {
+			endPage=totalpage;
+		}
+		Map map=new HashMap();
+		map.put("curpage", page);
+		map.put("totalpage", totalpage);
+		map.put("startPage", startPage);
+		map.put("endPage", endPage);
+		
+		ObjectMapper mapper=new ObjectMapper();
+		String json=mapper.writeValueAsString(map);
+		
+		return json;
+	}
+	
+	@GetMapping(value="food_detail_vue.do", produces="text/plain;charset=UTF-8")
+	public String food_detail_vue(int fno) throws Exception {
+		FoodVO vo=service.foodListDetailData(fno);
 		ObjectMapper mapper=new ObjectMapper();
 		String json=mapper.writeValueAsString(vo);
 		
-		return json;
+		return json; // response.data
 	}
 }

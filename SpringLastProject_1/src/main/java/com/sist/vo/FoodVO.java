@@ -21,7 +21,7 @@ import lombok.Data;
 // VO : 사용자 정의 데이터 형 => 메모리 할당을 요구하지 않음
 @Data
 public class FoodVO {
-	private int fno;
+	private int fno, hit, jjimcount, likecount;
 	private double score;
 	private String poster, name, type, address, phone, theme, price, time, seat, sessionId;
 }

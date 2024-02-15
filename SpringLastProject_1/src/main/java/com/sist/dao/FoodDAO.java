@@ -23,7 +23,27 @@ public class FoodDAO {
 	}
 	
 	public FoodVO FoodDetailData(int fno) {
-		return mapper.FoodDetailData(fno);
+		return mapper.foodDetailData(fno);
 	}
-
+	
+	public List<FoodVO> foodListData(Map map) {
+		return mapper.foodListData(map);
+	}
+	
+	public int foodListCount() {
+		return mapper.foodListCount();
+	}
+	
+	public FoodVO foodListDetailData(int fno) {
+		mapper.foodHitIncrement(fno);
+		return mapper.foodDetailData(fno);
+	}
+	
+	public List<FoodVO> foodTop7(){
+		return mapper.foodTop7();
+	}
+	
+	public List<FoodVO> foodHome12(){
+		return mapper.foodHome12();
+	}
 }
