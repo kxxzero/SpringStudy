@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 
 import com.sist.mapper.recipeMapper;
 import com.sist.vo.ChefVO;
+import com.sist.vo.GoodsVO;
+import com.sist.vo.RecipeDetailVO;
 import com.sist.vo.RecipeVO;
 
 @Repository
@@ -54,7 +56,16 @@ public class RecipeDAO {
 	public List<RecipeVO> chefDetailFindData(Map map) {
 		return mapper.chefDetailFindData(map);
 	}
+	
 	public int chefDetailFindTotalPage(Map map) {
 		return mapper.chefDetailFindTotalPage(map);
+	}
+	
+	public RecipeDetailVO recipeDetailData(int no) {
+		return mapper.recipeDetailData(no);
+	}
+	
+	public List<GoodsVO> recipeGoodsData(String goods_name) {
+		return mapper.recipeGoodsData(goods_name);
 	}
 }

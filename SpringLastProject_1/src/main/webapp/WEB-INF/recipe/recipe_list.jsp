@@ -17,14 +17,13 @@ a.link, .img_click{
 <body>
 	<div class="wrapper row3">
 	  <main class="container clear"> 
-	    <!-- main body --> 
+		<h2 class="sectiontitle">레시피 목록</h2>
 	    <div class="content" id="recipeApp">
-	      <h2 class="sectiontitle">레시피</h2>
 	      <div id="gallery">
 	        <figure>
-	          <header class="heading">총 <span style="font-size:20px; color: green">{{count||currency}}</span>개의 맛있는 레시피가 있습니다.</header>
+	          <header class="heading">총 <span style="font-size:20px; color: green">{{count}}</span>개의 맛있는 레시피가 있습니다.</header>
 	          <ul class="nospace clear">
-	            <li v-for="(vo,index) in recipe_list" class="index%4==0?'one_quarter first':'one quarter'"><a :href="'../recipe/recipe_list_detail.do?fno='+vo.fno"><img :src="vo.poster" :title="vo.title"></a></li>
+	            <li v-for="(vo,index) in recipe_list" :class="index%4==0?'one_quarter first':'one_quarter'"><a :href="'../recipe/recipe_list_detail.do?no='+vo.no"><img :src="vo.poster" :title="vo.title"></a></li>
 	          </ul>
 	          <figcaption></figcaption>
 	        </figure>
@@ -32,17 +31,17 @@ a.link, .img_click{
 	      <nav class="pagination">
 	        <ul>
 	          <li v-if="startPage>1"><a @click="prev()" class="link">&laquo; Previous</a></li>
-	          <li v-for="i in range(startPage, endPage)" class="i==curpage?'current':''"><a @click="pageChange()">{{i}}</a></li>
+	          <li v-for="i in range(startPage, endPage)" class="i===curpage?'current':''"><a @click="pageChange(i)" class="link">{{i}}</a></li>
 	          <li v-if="endPage<totalpage"><a @click="next()" class="link">Next &raquo;</a></li>
 	        </ul>
 	      </nav>
 	    </div>
-	    <!-- / main body -->
 	    <div class="clear"></div>
 	  </main>
 	</div>
 <script>
 	let recipeApp=Vue.createApp({
+		// 데이터 관리 => 멤버변수 => this.
 		data(){
 			return{
 				recipe_list:[],
@@ -53,12 +52,12 @@ a.link, .img_click{
 				count:''
 			}
 		}, 
-		filters:{
+		/* filters:{
 			currency:function(value){
 				let num=new Number(value);
-				return num.toFixed(0).replace(num.toFixed(0).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "1,"))
+				return num.toFixed(0).replace(num.toFixed(0).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1,"))
 			}
-		},		
+		},	 */	
 		mounted(){
 			// 브라우저에서 화면에 HTML이 실행된 경우에 처리 => 자동 호출 함수
 			/*
@@ -80,6 +79,7 @@ a.link, .img_click{
 			
 		},
 		methods:{
+			// 공통으로 사용되는 함수 => 반복 제거
 			dataRecv(){
 				axios.get('../recipe/recipe_list_vue.do',{
 					params:{
@@ -121,7 +121,7 @@ a.link, .img_click{
 				this.curpage=this.endPage+1
 				this.dataRecv()
 			},
-			pageChange(){
+			pageChange(page){
 				this.curpage=page
 				this.dataRecv()
 			}

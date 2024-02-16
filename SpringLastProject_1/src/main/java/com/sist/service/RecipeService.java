@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.sist.vo.ChefVO;
+import com.sist.vo.GoodsVO;
+import com.sist.vo.RecipeDetailVO;
 import com.sist.vo.RecipeVO;
 
 public interface RecipeService {
@@ -28,4 +30,8 @@ public interface RecipeService {
 	public List<RecipeVO> chefDetailFindData(Map map);
 	
 	public int chefDetailFindTotalPage(Map map);
+	
+	public RecipeDetailVO recipeDetailData(int no);
+	
+	public List<GoodsVO> recipeGoodsData(String goods_name);
 }

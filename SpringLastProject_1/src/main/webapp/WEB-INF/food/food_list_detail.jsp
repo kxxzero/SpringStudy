@@ -22,8 +22,8 @@ a.link, .img_click{
 			<div class="row">
 		      <table class="table">
 		        <tr>
-		         <td width=30% class="text-center" rowspan="8">
-		           <img :src="'https://www.menupan.com/'+vo.poster" style="width:100%">
+		         <td colspan="2" class="text-center">
+		           <img :src="'https://www.menupan.com'+food_detail.poster" style="width:500px">
 		         </td>
 		         <td colspan="2">
 		          <h3><span id="name">{{vo.name}}</span>&nbsp;<span style="color: orange">{{vo.score}}</span></h3>

@@ -6,7 +6,6 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://unpkg.com/vue@3"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script> <!-- axios : 전송 객체 => 데이터 입·출력 시 사용 -->
@@ -44,7 +43,6 @@ a.link, .img_click{
 	      	<detail_dialog v-bind:food_detail="food_detail"></detail_dialog>	
 	      </div>
 	    </div> 
-	    <!-- / main body -->
 	    <div class="clear"></div>
 	  </main>
 	</div>
@@ -115,7 +113,7 @@ a.link, .img_click{
 			
 		},
 		methods:{
-			dataRecv():{
+			dataRecv(){
 				axios.get('../food/find_vue.do',{
 					params:{
 						page:this.curpage,
@@ -199,7 +197,7 @@ a.link, .img_click{
 			// 상세보기 => dialog
 			'detail_dialog':detailComponent
 		}
-	}).mount('#foodApp')
+	}).mount('#findApp')
 </script>
 </body>
 </html>

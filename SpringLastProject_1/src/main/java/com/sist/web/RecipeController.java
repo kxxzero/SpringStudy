@@ -25,4 +25,10 @@ public class RecipeController {
 		model.addAttribute("cno", cno);
 		return "recipe/chef_detail";
 	}
+	
+	@GetMapping("recipe/recipe_detail.do")
+	public String recipe_detail(int no, Model model) {
+		model.addAttribute("no", no);
+		return "recipe/recipe_detail";
+	}
 }
