@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class WordVO {
-	private int count;
-	private String word;
+  private int count;
+  private String word;
 }

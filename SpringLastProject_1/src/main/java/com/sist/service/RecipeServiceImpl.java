@@ -1,21 +1,17 @@
 package com.sist.service;
-
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.sist.dao.RecipeDAO;
-import com.sist.vo.ChefVO;
-import com.sist.vo.GoodsVO;
-import com.sist.vo.RecipeDetailVO;
-import com.sist.vo.RecipeVO;
-
+import com.sist.dao.*;
+import com.sist.vo.*;
 @Service
-public class RecipeServiceImpl implements RecipeService {
-	@Autowired
-	private RecipeDAO rDao;
+// mapper => dao => service => serviceimpl (의존성이 낮은 프로그램 => 다른 클래스 영향이 없게 제작)
+// 유지보수 (스프링 , mvc)
+public class RecipeServiceImpl implements RecipeService{
+    @Autowired
+    private RecipeDAO rDao;
 
 	@Override
 	public List<RecipeVO> recipeHome12() {
@@ -28,11 +24,11 @@ public class RecipeServiceImpl implements RecipeService {
 		// TODO Auto-generated method stub
 		return rDao.chefHome12();
 	}
-	
+
 	@Override
 	public int recipeCount() {
 		// TODO Auto-generated method stub
-		return rDao.recipeTotalPage();
+		return rDao.recipeCount();
 	}
 
 	@Override
@@ -70,7 +66,7 @@ public class RecipeServiceImpl implements RecipeService {
 		// TODO Auto-generated method stub
 		return rDao.chefDetailTotalPage(cno);
 	}
-	
+
 	@Override
 	public List<RecipeVO> chefDetailFindData(Map map) {
 		// TODO Auto-generated method stub
@@ -94,5 +90,6 @@ public class RecipeServiceImpl implements RecipeService {
 		// TODO Auto-generated method stub
 		return rDao.recipeGoodsData(goods_name);
 	}
-
+   
+   
 }

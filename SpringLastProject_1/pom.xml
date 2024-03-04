@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.sist</groupId>
 	<artifactId>web</artifactId>
-	<name>SpringLastProject</name>
+	<name>SpringLastProject_1</name>
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	<properties>
@@ -28,16 +28,14 @@
 		    <version>1.1</version>
 		    <scope>provided</scope>
 		</dependency>
-	    
 	    <!-- kokoma -->
 	    <dependency>
-	    	<groupId>org.snu</groupId>
-	    	<artifactId>kokoma</artifactId>
-	    	<version>1.0</version>
-	    	<scope>system</scope>
-	    	<systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/org.snu.ids.ha.jar</systemPath>
+	      <groupId>org.snu</groupId>
+	      <artifactId>kokoma</artifactId>
+	      <version>1.0</version>
+	      <scope>system</scope>
+	      <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/org.snu.ids.ha.jar</systemPath>
 	    </dependency>
-	    
 	    <!-- security -->
 	    <dependency>
 		    <groupId>org.springframework.security</groupId>
@@ -520,7 +518,7 @@
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.7</version>
-			
+			<scope>test</scope>
 		</dependency>        
 	</dependencies>
 

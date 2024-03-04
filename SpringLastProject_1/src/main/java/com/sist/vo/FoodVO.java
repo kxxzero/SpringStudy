@@ -1,9 +1,14 @@
 package com.sist.vo;
 
+import java.io.Serializable;
+
+import javax.validation.constraints.Size;
+
 import lombok.Data;
+import lombok.NonNull;
 
 /*
- FNO                                       NOT NULL NUMBER
+ *    FNO                                       NOT NULL NUMBER
  POSTER                                    NOT NULL VARCHAR2(1000)
  NAME                                      NOT NULL VARCHAR2(300)
  TYPE                                      NOT NULL VARCHAR2(100)
@@ -17,11 +22,11 @@ import lombok.Data;
  CONTENT                                            CLOB
  LINK                                               VARCHAR2(300)
  */
-
-// VO : 사용자 정의 데이터 형 => 메모리 할당을 요구하지 않음
+// 사용자 정의 데이터형 => 메모리 할당을 요청하지 않는다 
 @Data
-public class FoodVO {
-	private int fno, hit, jjimcount, likecount;
-	private double score;
-	private String poster, name, type, address, phone, theme, price, time, seat, sessionId;
+public class FoodVO{
+    private int fno,hit,jjimcount,likecount;
+    private double score;
+    private String poster,name,type,address,phone,theme,price,time,seat,sessionId;
+	
 }

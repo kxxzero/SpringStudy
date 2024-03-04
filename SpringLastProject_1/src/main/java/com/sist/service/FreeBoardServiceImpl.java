@@ -1,15 +1,12 @@
 package com.sist.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.sist.dao.FreeBoardDAO;
-import com.sist.vo.FreeBoardVO;
-
+import java.util.*;
+import com.sist.dao.*;
+import com.sist.vo.*;
 @Service
-public class FreeBoardServiceImpl implements FreeBoardService {
+public class FreeBoardServiceImpl implements FreeBoardSevice{
 	@Autowired
     private FreeBoardDAO fDao;
 	
@@ -51,8 +48,8 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 
 	@Override
 	public String freeboardUpdate(FreeBoardVO vo) {
+		// TODO Auto-generated method stub
 		return fDao.freeboardUpdate(vo);
-		
 	}
-	
+  
 }
